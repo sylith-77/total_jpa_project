@@ -1,3 +1,5 @@
+package com.my.total_jpa_back.repository;
+
 import com.my.total_jpa_back.entity.OrderStatus;
 import com.my.total_jpa_back.entity.UserOrder;
 import com.my.total_jpa_back.repository.UserOrderRepository;
