@@ -1,5 +1,6 @@
 package com.my.total_jpa_back;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
