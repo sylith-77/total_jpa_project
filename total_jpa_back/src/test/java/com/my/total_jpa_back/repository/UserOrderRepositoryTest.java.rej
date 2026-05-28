@@ -1,0 +1,7 @@
+diff a/total_jpa_back/src/test/java/com/my/total_jpa_back/repository/UserOrderRepositoryTest.java b/total_jpa_back/src/test/java/com/my/total_jpa_back/repository/UserOrderRepositoryTest.java	(rejected hunks)
+@@ -3,3 +4,5 @@
++package com.my.total_jpa_back.repository;
++
+ import com.my.total_jpa_back.entity.OrderStatus;
+ import com.my.total_jpa_back.entity.UserOrder;
+ import com.my.total_jpa_back.repository.UserOrderRepository;
