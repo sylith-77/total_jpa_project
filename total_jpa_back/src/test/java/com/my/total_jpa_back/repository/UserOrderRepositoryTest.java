@@ -1,13 +1,14 @@
 package com.my.total_jpa_back.repository;
 
-import com.my.total_jpa_back.entity.OrderStatus;
-import com.my.total_jpa_back.entity.UserOrder;
-import com.my.total_jpa_back.repository.UserOrderRepository;
+import com.my.total_jpa_back.common.entity.OrderStatus;
+import com.my.total_jpa_back.orders.entity.UserOrder;
+import com.my.total_jpa_back.orders.repository.UserOrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 class UserOrderRepositoryTest {
     @Autowired
     UserOrderRepository userOrderRepository;
+
+    // 주문 형태에 따른 오름차순 정렬, 제품명에 내림차순 정렬, 같은 제품명에 대해서는 주문일의 내림차순
+    // 상위 100개
+    @Test
+    @DisplayName("주문상태에 따른 정렬")
+    void multiConditionSortTest() {
+        Sort sort = Sort.by("status").ascending()
+                .and(
+                        Sort.by("productName")
+                                .descending()
+                                .and(
+                                        Sort.by("createdAt")
+                                                .descending()
+                                )
+                );
+        List<UserOrder> orders = userOrderRepository.findAll(sort);
+        orders.stream()
+                .limit(1000)
+                .forEach(x -> log.info("status : {}, productName : {}, createdAt : {}",
+                        x.getStatus(), x.getProductName(), x.getCreatedAt()));
+    }
+
 
     @Test
     @DisplayName("전체주문조회")
